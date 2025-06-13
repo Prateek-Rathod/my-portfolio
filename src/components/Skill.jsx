@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Code, Monitor, Database, Layers } from "lucide-react";
+import { Code, Monitor, Database, Layers, Camera } from "lucide-react"; // Camera icon added
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -23,6 +23,11 @@ const skills = [
     title: "Database Management",
     icon: <Database size={24} className="text-pink-500" />,
     items: "SQL, MySQL",
+  },
+  {
+    title: "Video & Photo Editing", // ✅ New skill added
+    icon: <Camera size={24} className="text-yellow-400" />,
+    items: "Adobe Premiere Pro, Photoshop, Canva, CapCut",
   },
 ];
 
@@ -49,7 +54,7 @@ const Skill = () => {
               setGlowTrailIndex(-1);
             }, 300);
           }
-        }, 400); // controls trail speed
+        }, 400);
       }
     }
   }, [inView, animationDone, controls]);
@@ -75,7 +80,7 @@ const Skill = () => {
       initial="hidden"
       animate={controls}
       variants={containerVariants}
-      className="py-16  text-white"
+      className="py-16 text-white"
     >
       <h1 className="text-4xl font-bold text-center mb-12">Skills</h1>
 
