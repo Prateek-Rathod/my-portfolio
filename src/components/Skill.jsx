@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Code, Monitor, Database, Layers, Camera } from "lucide-react"; // Camera icon added
+import { Code, Monitor, Database, Layers, Camera } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -25,7 +25,7 @@ const skills = [
     items: "SQL, MySQL",
   },
   {
-    title: "Video & Photo Editing", // ✅ New skill added
+    title: "Video & Photo Editing",
     icon: <Camera size={24} className="text-yellow-400" />,
     items: "Adobe Premiere Pro, Photoshop, Canva, CapCut",
   },
@@ -84,32 +84,9 @@ const Skill = () => {
     >
       <h1 className="text-4xl font-bold text-center mb-12">Skills</h1>
 
-      <div className="max-w-4xl mx-auto px-6 flex gap-6">
-        {/* Timeline */}
-        <div className="relative w-16">
-          <div className="absolute left-1/2 top-0 h-full w-1 bg-gray-600 transform -translate-x-1/2" />
-
-          {skills.map((_, index) => {
-            const isHovered = hoveredIndex === index;
-            const isTrail = glowTrailIndex === index;
-
-            return (
-              <div
-                key={index}
-                className={`absolute left-1/2 w-4 h-4 rounded-full border-2 border-black transform -translate-x-1/2 transition-all duration-300 ${
-                  isHovered || isTrail
-                    ? "bg-green-400 shadow-[0_0_12px_6px_rgba(34,197,94,0.5)]"
-                    : "bg-white"
-                }`}
-                style={{ top: `${index * 100 + 16}px` }}
-              />
-            );
-          })}
-        </div>
-
-        {/* Skill List */}
+      <div className="max-w-4xl mx-auto px-6">
         <motion.div
-          className="bg-[#121212] rounded-xl p-8 border border-gray-700 flex-1"
+          className="bg-[#121212] rounded-xl p-8 border border-gray-700"
           variants={containerVariants}
         >
           <div className="flex flex-col gap-12">
@@ -117,16 +94,29 @@ const Skill = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="flex items-start gap-4 hover:bg-gray-800 p-2 rounded-lg transition"
+                className="flex items-start gap-4 hover:bg-gray-800 p-3 rounded-lg transition"
                 onMouseEnter={() => animationDone && setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="mt-1">{skill.icon}</div>
+                {/* Timeline dot beside title */}
+                <div className="relative pt-1">
+                  <div
+                    className={`w-3 h-3 rounded-full border-2 border-black transition-all duration-300
+                      ${hoveredIndex === index || glowTrailIndex === index
+                        ? "bg-green-400 shadow-[0_0_8px_4px_rgba(34,197,94,0.5)]"
+                        : "bg-white"}`}
+                  />
+                </div>
+
+                {/* Skill icon, title and description */}
                 <div>
-                  <h3 className="text-lg font-semibold mb-1 cursor-pointer">
-                    {skill.title}
-                  </h3>
-                  <p className="text-gray-400">{skill.items}</p>
+                  <div className="flex items-center gap-2">
+                    <div>{skill.icon}</div>
+                    <h3 className="text-lg font-semibold cursor-pointer">
+                      {skill.title}
+                    </h3>
+                  </div>
+                  <p className="text-gray-400 ml-7">{skill.items}</p>
                 </div>
               </motion.div>
             ))}
