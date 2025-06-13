@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  cursor: none;
+}
+
+/* Custom Cursor Styles */
+.cursor-dot,
+.cursor-outline {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.cursor-outline {
+  width: 32px;
+  height: 32px;
+  border: 2px solid yellow;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+}
+
+/* Morph effect on hover targets */
+.cursor-hover-target:hover ~ .cursor-outline {
+  width: 100px !important;
+  height: 40px !important;
+  border-radius: 8px !important;
+}
