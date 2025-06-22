@@ -12,7 +12,7 @@ const Header = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`w-full px-6 py-4 ${
-        isDark ? "bg-black" : "bg-[#39FF14]"
+        isDark ? "bg-black" : "bg-[#0B1D3A]"
       } shadow-md sticky top-0 z-50 transition-colors duration-500`}
     >
       <nav className="flex items-center justify-between max-w-7xl mx-auto">

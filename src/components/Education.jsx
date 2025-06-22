@@ -21,7 +21,7 @@ const educationItems = [
     type: "PUC",
     title: "PUC / 12ᵗʰ",
     details: [
-      "🔹 Completed 12ᵗʰ at Narayana Junior College, Hyderabad.",
+      "🔹 Completed 12ᵗʰ from Narayana Junior College, Hyderabad.",
       "🔹 Secured an aggregate of 95.8%.",
       "🔹 Focused on core science subjects and entrance preparation.",
     ],
