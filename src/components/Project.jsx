@@ -13,7 +13,7 @@ const projectData = [
     description:
       "Built a full-stack MERN platform with secure authentication, order tracking, product CRUD, and integrated Stripe/Razorpay.",
     tech: ["React", "Node.js", "Express", "MongoDB", "Stripe", "Razorpay"],
-    github: "",
+    github: "https://prateek-rathod.github.io/Ecommerce",
   },
   {
     title: "Coffee Shop App",
