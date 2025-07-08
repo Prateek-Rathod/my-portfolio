@@ -31,7 +31,7 @@ const skills = [
   },
 ];
 
-const Skill = () => {
+const Skill = ({ isDarkMode }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [glowTrailIndex, setGlowTrailIndex] = useState(-1);
   const [animationDone, setAnimationDone] = useState(false);
@@ -80,13 +80,23 @@ const Skill = () => {
       initial="hidden"
       animate={controls}
       variants={containerVariants}
-      className="py-16 text-white"
+      className={`py-16 transition-colors duration-500 ${
+        isDarkMode ? 'text-white' : 'text-gray-900'
+      }`}
     >
-      <h1 className="text-4xl font-bold text-center mb-12">Skills</h1>
+      <h1 className={`text-4xl font-bold text-center mb-12 ${
+        isDarkMode ? 'text-white' : 'text-gray-900'
+      }`}>
+        Skills
+      </h1>
 
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
-          className="bg-[#121212] rounded-xl p-8 border border-gray-700"
+          className={`rounded-xl p-8 border transition-colors duration-500 ${
+            isDarkMode 
+              ? 'bg-[#121212] border-gray-700' 
+              : 'bg-white border-gray-200 shadow-lg'
+          }`}
           variants={containerVariants}
         >
           <div className="flex flex-col gap-12">
@@ -94,17 +104,20 @@ const Skill = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="flex items-start gap-4 hover:bg-gray-800 p-3 rounded-lg transition"
+                className={`flex items-start gap-4 p-3 rounded-lg transition ${
+                  isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-50'
+                }`}
                 onMouseEnter={() => animationDone && setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 {/* Timeline dot beside title */}
                 <div className="relative pt-1">
                   <div
-                    className={`w-3 h-3 rounded-full border-2 border-black transition-all duration-300
-                      ${hoveredIndex === index || glowTrailIndex === index
+                    className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
+                      hoveredIndex === index || glowTrailIndex === index
                         ? "bg-green-400 shadow-[0_0_8px_4px_rgba(34,197,94,0.5)]"
-                        : "bg-white"}`}
+                        : isDarkMode ? "bg-white border-black" : "bg-white border-gray-400"
+                    }`}
                   />
                 </div>
 
@@ -112,11 +125,17 @@ const Skill = () => {
                 <div>
                   <div className="flex items-center gap-2">
                     <div>{skill.icon}</div>
-                    <h3 className="text-lg font-semibold cursor-pointer">
+                    <h3 className={`text-lg font-semibold cursor-pointer ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>
                       {skill.title}
                     </h3>
                   </div>
-                  <p className="text-gray-400 ml-7">{skill.items}</p>
+                  <p className={`ml-7 ${
+                    isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                  }`}>
+                    {skill.items}
+                  </p>
                 </div>
               </motion.div>
             ))}
