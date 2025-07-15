@@ -165,7 +165,7 @@ const Education = ({ isDarkMode }) => {
                           : 'border-gray-400 text-gray-700 hover:border-blue-500'
                       }`}
                     >
-                      <span className="w-2 h-2 rounded-full transition-all duration-300 bg-red-500 group-hover:bg-green-400 group-hover:shadow-[0_0_10px_3px_rgba(34,197,94,0.8)]" />
+                      <span className="w-2 h-2 rounded-full font-bold transition-all duration-300 bg-red-500 group-hover:bg-green-400 group-hover:shadow-[0_0_10px_3px_rgba(34,197,94,0.8)]" />
                       {item.buttonText}
                     </a>
                   )}
