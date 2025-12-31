@@ -14,7 +14,7 @@ const educationItems = [
     ],
     logo,
     buttonText: "View Resume",
-    buttonLink: "/Prateek_Rathod_Resume.pdf",
+    buttonLink: "/my-portfolio/Prateek_Rathod_Resume.pdf",
   },
   {
     type: "PUC",
