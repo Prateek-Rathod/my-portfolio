@@ -12,7 +12,7 @@ const Hero = ({ isDarkMode }) => {
 
   useEffect(() => {
     const typed = new Typed(typedRef.current, {
-      strings: ["Web Developer", "Designer", "Coder"],
+      strings: ["Designer"],
       typeSpeed: 50,
       backSpeed: 50,
       loop: true,
