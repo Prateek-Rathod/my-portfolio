@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import logo from "../assets/logo.png";
-import resumePDF from "../assets/Prateek_Rathod_Resume.pdf";
 
 const educationItems = [
   {
@@ -15,7 +14,7 @@ const educationItems = [
     ],
     logo,
     buttonText: "View Resume",
-    buttonLink: resumePDF,
+    buttonLink: "/Prateek_Rathod_Resume.pdf",
   },
   {
     type: "PUC",
