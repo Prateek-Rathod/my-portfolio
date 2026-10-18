@@ -2,6 +2,14 @@ import React from "react";
 import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import ContactForm from "./ContactForm";
 
+const footerLinks = [
+  ["About", "#about"],
+  ["Experience", "#experience"],
+  ["Education", "#education"],
+  ["Skills", "#skills"],
+  ["Projects", "#projects"],
+];
+
 const Footer = ({ isDarkMode }) => {
   const year = new Date().getFullYear();
 
@@ -89,7 +97,16 @@ const Footer = ({ isDarkMode }) => {
             Prateek Rathod
           </a>
           <p>© {year} Prateek Rathod. All rights reserved.</p>
-          <a href="#home" className="hover:opacity-75">Back to top ↑</a>
+          <nav className="flex flex-wrap gap-x-4 gap-y-2" aria-label="Footer navigation">
+            {footerLinks.map(([label, href]) => (
+              <a key={label} href={href} className="hover:opacity-75">
+                {label}
+              </a>
+            ))}
+            <a href="#home" className="font-semibold hover:opacity-75">
+              Back to top ↑
+            </a>
+          </nav>
         </div>
       </div>
     </footer>

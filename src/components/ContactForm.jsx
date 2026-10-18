@@ -90,6 +90,17 @@ const ContactForm = ({ isDarkMode }) => {
         </div>
       </div>
 
+      <div className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="contact-gotcha">Leave this field empty</label>
+        <input
+          id="contact-gotcha"
+          name="_gotcha"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div>
         <label
           htmlFor="contact-message"

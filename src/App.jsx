@@ -9,6 +9,7 @@ import Skills from "./components/Skill";
 import Projects from "./components/Project";
 import Footer from "./components/Footer";
 import CustomCursor from "./components/CustomCursor";
+import PortfolioAssistant from "./components/PortfolioAssistant";
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -48,6 +49,7 @@ const App = () => {
           <Projects isDarkMode={isDarkMode} />
         </main>
         <Footer isDarkMode={isDarkMode} />
+        <PortfolioAssistant isDarkMode={isDarkMode} />
       </div>
     </MotionConfig>
   );

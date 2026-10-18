@@ -19,9 +19,14 @@ const skillGroups = [
     skills: ["C++", "C", "Python", "SQL"],
   },
   {
-    title: "Web development",
+    title: "Frontend development",
     icon: <Monitor size={19} aria-hidden="true" />,
-    skills: ["HTML", "CSS", "React.js"],
+    skills: ["HTML", "CSS", "JavaScript", "React.js", "Tailwind CSS"],
+  },
+  {
+    title: "Backend development",
+    icon: <PanelsTopLeft size={19} aria-hidden="true" />,
+    skills: ["Node.js", "Express.js", "REST APIs"],
   },
   {
     title: "Data & machine learning",
@@ -36,7 +41,7 @@ const skillGroups = [
   {
     title: "Tools & platforms",
     icon: <Wrench size={19} aria-hidden="true" />,
-    skills: ["GitHub", "Postman", "Android Studio"],
+    skills: ["Git", "GitHub", "Postman", "Android Studio", "AWS", "Docker"],
   },
   {
     title: "Foundations & creative",

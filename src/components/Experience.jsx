@@ -91,6 +91,20 @@ const Experience = ({ isDarkMode }) => (
             <div className={`mt-6 border-t pt-5 ${
               isDarkMode ? "border-white/[0.08]" : "border-gray-100"
             }`}>
+              {role.highlights?.length > 0 && (
+                <ul className={`mb-5 space-y-2.5 text-sm leading-6 ${
+                  isDarkMode ? "text-gray-300" : "text-gray-600"
+                }`}>
+                  {role.highlights.map((highlight) => (
+                    <li key={highlight} className="flex items-start gap-3">
+                      <span className={`mt-[0.62rem] h-1.5 w-1.5 shrink-0 rounded-full ${
+                        isDarkMode ? "bg-sky-300" : "bg-blue-600"
+                      }`} aria-hidden="true" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
               <p className={`mb-3 text-xs font-semibold uppercase tracking-[0.18em] ${
                 isDarkMode ? "text-gray-500" : "text-gray-500"
               }`}>

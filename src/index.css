@@ -19,10 +19,28 @@ body {
   margin: 0;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  body {
-    cursor: none;
-  }
+body[data-custom-cursor-active="true"] {
+  cursor: none;
+}
+
+body[data-custom-cursor-active="true"] dialog {
+  cursor: none;
+}
+
+.custom-cursor-layer {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  pointer-events: none;
 }
 
 ::selection {
@@ -38,5 +56,9 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .custom-cursor-layer {
+    display: none;
   }
 }
