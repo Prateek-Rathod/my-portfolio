@@ -2,38 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
 body {
-  cursor: none;
+  min-width: 320px;
+  margin: 0;
 }
 
-/* Custom Cursor Styles */
-.cursor-dot,
-.cursor-outline {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
 }
 
-.cursor-dot {
-  width: 8px;
-  height: 8px;
-  background: #fff;
-  border-radius: 50%;
+::selection {
+  color: #07111d;
+  background: #7dd3fc;
 }
 
-.cursor-outline {
-  width: 32px;
-  height: 32px;
-  border: 2px solid yellow;
-  border-radius: 50%;
-  transition: all 0.25s ease;
+:focus-visible {
+  outline: 2px solid #7dd3fc;
+  outline-offset: 3px;
 }
 
-/* Morph effect on hover targets */
-.cursor-hover-target:hover ~ .cursor-outline {
-  width: 100px !important;
-  height: 40px !important;
-  border-radius: 8px !important;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

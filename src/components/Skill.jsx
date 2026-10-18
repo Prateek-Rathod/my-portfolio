@@ -1,149 +1,114 @@
-import React, { useState, useEffect } from "react";
-import { Code, Monitor, Database, Layers, Camera } from "lucide-react";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React from "react";
+import {
+  Braces,
+  Database,
+  Monitor,
+  PanelsTopLeft,
+  Sparkles,
+  Wrench,
+} from "lucide-react";
+import { motion } from "framer-motion";
 
-const skills = [
+const AnimatedSection = motion.section;
+const AnimatedCard = motion.article;
+
+const skillGroups = [
   {
-    title: "Programming Languages",
-    icon: <Code size={24} className="text-blue-500" />,
-    items: "C, C++, Python, Java",
+    title: "Programming",
+    icon: <Braces size={19} aria-hidden="true" />,
+    skills: ["C++", "C", "Python", "SQL"],
   },
   {
-    title: "Web Development",
-    icon: <Monitor size={24} className="text-green-500" />,
-    items: "HTML, CSS, JavaScript",
+    title: "Web development",
+    icon: <Monitor size={19} aria-hidden="true" />,
+    skills: ["HTML", "CSS", "React.js"],
   },
   {
-    title: "Frameworks & Libraries",
-    icon: <Layers size={24} className="text-purple-500" />,
-    items: "React",
+    title: "Data & machine learning",
+    icon: <Sparkles size={19} aria-hidden="true" />,
+    skills: ["NumPy", "Pandas", "scikit-learn", "AI/ML basics"],
   },
   {
-    title: "Database Management",
-    icon: <Database size={24} className="text-pink-500" />,
-    items: "SQL, MySQL",
+    title: "Databases",
+    icon: <Database size={19} aria-hidden="true" />,
+    skills: ["MongoDB", "MySQL"],
   },
   {
-    title: "Video & Photo Editing",
-    icon: <Camera size={24} className="text-yellow-400" />,
-    items: "Adobe Premiere Pro, Photoshop, Canva, CapCut",
+    title: "Tools & platforms",
+    icon: <Wrench size={19} aria-hidden="true" />,
+    skills: ["GitHub", "Postman", "Android Studio"],
+  },
+  {
+    title: "Foundations & creative",
+    icon: <PanelsTopLeft size={19} aria-hidden="true" />,
+    skills: ["Data Structures & Algorithms", "OOP", "OS", "DBMS", "Video Editing", "Photography"],
   },
 ];
 
-const Skill = ({ isDarkMode }) => {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [glowTrailIndex, setGlowTrailIndex] = useState(-1);
-  const [animationDone, setAnimationDone] = useState(false);
-
-  const controls = useAnimation();
-  const [ref, inView] = useInView({ threshold: 0.2 });
-
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-      if (!animationDone) {
-        let i = 0;
-        const interval = setInterval(() => {
-          setGlowTrailIndex(i);
-          i++;
-          if (i >= skills.length) {
-            clearInterval(interval);
-            setTimeout(() => {
-              setAnimationDone(true);
-              setGlowTrailIndex(-1);
-            }, 300);
-          }
-        }, 400);
-      }
-    }
-  }, [inView, animationDone, controls]);
-
-  const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.15 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
-
-  return (
-    <motion.section
-      id="third"
-      ref={ref}
-      initial="hidden"
-      animate={controls}
-      variants={containerVariants}
-      className={`py-16 transition-colors duration-500 ${
-        isDarkMode ? 'text-white' : 'text-gray-900'
-      }`}
-    >
-      <h1 className={`text-4xl font-bold text-center mb-12 ${
-        isDarkMode ? 'text-white' : 'text-gray-900'
-      }`}>
-        Skills
-      </h1>
-
-      <div className="max-w-4xl mx-auto px-6">
-        <motion.div
-          className={`rounded-xl p-8 border transition-colors duration-500 ${
-            isDarkMode 
-              ? 'bg-[#121212] border-gray-700' 
-              : 'bg-white border-gray-200 shadow-lg'
-          }`}
-          variants={containerVariants}
-        >
-          <div className="flex flex-col gap-12">
-            {skills.map((skill, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className={`flex items-start gap-4 p-3 rounded-lg transition ${
-                  isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-50'
-                }`}
-                onMouseEnter={() => animationDone && setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                {/* Timeline dot beside title */}
-                <div className="relative pt-1">
-                  <div
-                    className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
-                      hoveredIndex === index || glowTrailIndex === index
-                        ? "bg-green-400 shadow-[0_0_8px_4px_rgba(34,197,94,0.5)]"
-                        : isDarkMode ? "bg-white border-black" : "bg-white border-gray-400"
-                    }`}
-                  />
-                </div>
-
-                {/* Skill icon, title and description */}
-                <div>
-                  <div className="flex items-center gap-2">
-                    <div>{skill.icon}</div>
-                    <h3 className={`text-lg font-semibold cursor-pointer ${
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    }`}>
-                      {skill.title}
-                    </h3>
-                  </div>
-                  <p className={`ml-7 ${
-                    isDarkMode ? 'text-gray-400' : 'text-gray-600'
-                  }`}>
-                    {skill.items}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+const Skill = ({ isDarkMode }) => (
+  <AnimatedSection
+    id="skills"
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 0.55 }}
+    className={`scroll-mt-24 py-20 px-5 sm:px-8 ${
+      isDarkMode ? "text-white" : "text-gray-900"
+    }`}
+  >
+    <div className="mx-auto max-w-6xl">
+      <div className="mb-12 text-center">
+        <p className={`mb-2 text-xs font-semibold uppercase tracking-[0.24em] ${
+          isDarkMode ? "text-sky-300" : "text-blue-700"
+        }`}>
+          Tools I work with
+        </p>
+        <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Skills</h2>
       </div>
-    </motion.section>
-  );
-};
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {skillGroups.map(({ title, icon, skills }, index) => (
+          <AnimatedCard
+            key={title}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.4, delay: index * 0.06 }}
+            className={`group rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1 ${
+              isDarkMode
+                ? "border-white/[0.08] bg-white/[0.025] hover:border-sky-300/30 hover:bg-white/[0.045]"
+                : "border-gray-200 bg-white hover:border-blue-200 hover:shadow-lg"
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <span className={`grid h-10 w-10 place-items-center rounded-xl transition-colors ${
+                isDarkMode
+                  ? "bg-sky-300/10 text-sky-300 group-hover:bg-sky-300/15"
+                  : "bg-blue-50 text-blue-700 group-hover:bg-blue-100"
+              }`}>
+                {icon}
+              </span>
+              <h3 className="font-semibold">{title}</h3>
+            </div>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {skills.map((skill) => (
+                <span
+                  key={skill}
+                  className={`rounded-lg border px-2.5 py-1.5 text-xs transition-colors ${
+                    isDarkMode
+                      ? "border-white/[0.08] bg-black/20 text-gray-300 group-hover:border-white/[0.12]"
+                      : "border-gray-200 bg-gray-50 text-gray-600 group-hover:border-blue-100"
+                  }`}
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </AnimatedCard>
+        ))}
+      </div>
+    </div>
+  </AnimatedSection>
+);
 
 export default Skill;

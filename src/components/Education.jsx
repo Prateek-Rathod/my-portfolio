@@ -1,181 +1,101 @@
-import React, { useEffect, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import logo from "../assets/logo.png";
+import React from "react";
+import { GraduationCap } from "lucide-react";
+import { motion } from "framer-motion";
 
-const educationItems = [
+const AnimatedSection = motion.section;
+const AnimatedArticle = motion.article;
+
+const education = [
   {
-    type: "BE",
-    title: "BACHELOR OF ENGINEERING",
-    details: [
-      "🔹 Pursuing Engineering at BMS College of Engineering, Bangalore.",
-      "🔹 Gained strong fundamentals in programming, web development, and software design.",
-      "🔹 Worked on multiple projects and participated in technical events and hackathons.",
-    ],
-    logo,
-    buttonText: "View Resume",
-    buttonLink: "/my-portfolio/Prateek_Rathod_Resume.pdf",
+    institution: "BMS College of Engineering",
+    location: "Bengaluru, India",
+    qualification: "B.E. in Information Science",
+    dates: "2022 – 2026",
+    result: "CPI: 8.5",
   },
   {
-    type: "PUC",
-    title: "PUC / 12ᵗʰ",
-    details: [
-      "🔹 Completed 12ᵗʰ from Narayana Junior College, Hyderabad.",
-      "🔹 Secured an aggregate of 95.8%.",
-      "🔹 Focused on core science subjects and entrance preparation.",
-    ],
-    logo,
-    buttonText: null,
-    buttonLink: null,
+    institution: "Narayana Junior College",
+    location: "Hyderabad",
+    qualification: "Intermediate · Central Board of Secondary Education",
+    dates: "2022",
+    result: "95.6%",
+  },
+  {
+    institution: "Gnyana Sudha Vidyalaya",
+    location: "Bidar",
+    qualification: "High School · Central Board of Secondary Education",
+    dates: "2020",
+    result: "69%",
   },
 ];
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const containerVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.2 },
-  },
-};
-
-const Education = ({ isDarkMode }) => {
-  const controls = useAnimation();
-  const [ref, inView] = useInView({ threshold: 0.2 });
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [glowTrailIndex, setGlowTrailIndex] = useState(-1);
-  const [animationDone, setAnimationDone] = useState(false);
-
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-      if (!animationDone) {
-        let i = 0;
-        const interval = setInterval(() => {
-          setGlowTrailIndex(i);
-          i++;
-          if (i >= educationItems.length) {
-            clearInterval(interval);
-            setTimeout(() => {
-              setAnimationDone(true);
-              setGlowTrailIndex(-1);
-            }, 300);
-          }
-        }, 400);
-      }
-    }
-  }, [inView, animationDone, controls]);
-
-  return (
-    <motion.section
-      id="second"
-      ref={ref}
-      initial="hidden"
-      animate={controls}
-      variants={containerVariants}
-      className={`py-16 px-4 transition-colors duration-500 ${
-        isDarkMode ? 'text-white' : 'text-gray-900'
-      }`}
-    >
-      <h1 className={`text-4xl font-bold text-center mb-12 ${
-        isDarkMode ? 'text-white' : 'text-gray-900'
-      }`}>
-        Education
-      </h1>
-
-      <div className="max-w-3xl mx-auto flex">
-        {/* Timeline Line & Dots */}
-        <div className="relative w-16">
-          <div className={`absolute left-1/2 top-0 h-full w-1 transform -translate-x-1/2 ${
-            isDarkMode ? 'bg-gray-600' : 'bg-gray-300'
-          }`} />
-          {educationItems.map((_, index) => {
-            const isHovered = hoveredIndex === index;
-            const isTrail = glowTrailIndex === index;
-            return (
-              <div
-                key={index}
-                className={`absolute left-1/2 w-4 h-4 rounded-full border-2 transform -translate-x-1/2 transition-all duration-300 ${
-                  isHovered || isTrail
-                    ? "bg-green-400 shadow-[0_0_12px_6px_rgba(34,197,94,0.5)]"
-                    : isDarkMode ? "bg-white border-black" : "bg-white border-gray-400"
-                }`}
-                style={{ top: `${index * 200 + 32}px` }}
-              />
-            );
-          })}
-        </div>
-
-        {/* Card List */}
-        <motion.div
-          className={`rounded-xl p-8 border flex-1 transition-colors duration-500 ${
-            isDarkMode 
-              ? 'bg-[#121212] border-gray-700' 
-              : 'bg-white border-gray-200 shadow-lg'
-          }`}
-          variants={containerVariants}
-        >
-          <div className="flex flex-col gap-16">
-            {educationItems.map((item, index) => (
-              <motion.div
-                key={index}
-                className={`flex gap-4 items-start p-4 rounded-lg transition ${
-                  isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-50'
-                }`}
-                variants={itemVariants}
-                onMouseEnter={() => animationDone && setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div className="flex-shrink-0">
-                  <img
-                    src={item.logo}
-                    alt="logo"
-                    className="w-20 h-20 rounded-full"
-                  />
-                </div>
-
-                <div>
-                  <h3 className={`text-xl font-semibold mb-2 ${
-                    isDarkMode ? 'text-yellow-400' : 'text-blue-600'
-                  }`}>
-                    {item.title}
-                  </h3>
-                  <ul className={`text-sm space-y-1 mb-3 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                  }`}>
-                    {item.details.map((point, i) => (
-                      <li key={i}>{point}</li>
-                    ))}
-                  </ul>
-
-                  {item.buttonLink && (
-                    <a
-                      href={item.buttonLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 px-4 py-2 border rounded-lg transition-all duration-300 group ${
-                        isDarkMode 
-                          ? 'border-gray-500 text-white' 
-                          : 'border-gray-400 text-gray-700 hover:border-blue-500'
-                      }`}
-                    >
-                      <span className="w-2 h-2 rounded-full font-bold transition-all duration-300 bg-red-500 group-hover:bg-green-400 group-hover:shadow-[0_0_10px_3px_rgba(34,197,94,0.8)]" />
-                      {item.buttonText}
-                    </a>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+const Education = ({ isDarkMode }) => (
+  <AnimatedSection
+    id="education"
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.12 }}
+    transition={{ duration: 0.55 }}
+    className={`scroll-mt-24 py-20 px-5 sm:px-8 ${
+      isDarkMode ? "text-white" : "text-gray-900"
+    }`}
+  >
+    <div className="mx-auto max-w-5xl">
+      <div className="mb-12 text-center">
+        <p className={`mb-2 text-xs font-semibold uppercase tracking-[0.24em] ${
+          isDarkMode ? "text-sky-300" : "text-blue-700"
+        }`}>
+          Academic background
+        </p>
+        <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+          Education
+        </h2>
       </div>
-    </motion.section>
-  );
-};
+
+      <div className="grid gap-4 md:grid-cols-3">
+        {education.map((item, index) => (
+          <AnimatedArticle
+            key={item.institution}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+            className={`group relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 ${
+              isDarkMode
+                ? "border-white/[0.09] bg-white/[0.025] hover:border-sky-300/30 hover:bg-white/[0.04]"
+                : "border-gray-200 bg-white hover:border-blue-200 hover:shadow-lg"
+            }`}
+          >
+            <div className={`mb-6 grid h-11 w-11 place-items-center rounded-xl transition-transform duration-300 group-hover:scale-110 ${
+              isDarkMode ? "bg-sky-300/10 text-sky-300" : "bg-blue-50 text-blue-700"
+            }`}>
+              <GraduationCap size={21} aria-hidden="true" />
+            </div>
+            <p className={`text-xs font-medium ${isDarkMode ? "text-gray-500" : "text-gray-500"}`}>
+              {item.dates}
+            </p>
+            <h3 className="mt-2 text-lg font-bold leading-snug">{item.institution}</h3>
+            <p className={`mt-1 text-sm ${isDarkMode ? "text-gray-500" : "text-gray-500"}`}>
+              {item.location}
+            </p>
+            <p className={`mt-4 min-h-10 text-sm leading-5 ${
+              isDarkMode ? "text-gray-300" : "text-gray-600"
+            }`}>
+              {item.qualification}
+            </p>
+            <p className={`mt-4 inline-flex rounded-full px-3 py-1 text-sm font-semibold ${
+              isDarkMode ? "bg-sky-300/10 text-sky-200" : "bg-blue-50 text-blue-700"
+            }`}>
+              {item.result}
+            </p>
+            <span className={`absolute -bottom-10 -right-6 h-24 w-24 rounded-full blur-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-20 ${
+              isDarkMode ? "bg-sky-300" : "bg-blue-500"
+            }`} />
+          </AnimatedArticle>
+        ))}
+      </div>
+    </div>
+  </AnimatedSection>
+);
 
 export default Education;

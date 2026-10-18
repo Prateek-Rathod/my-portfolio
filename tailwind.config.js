@@ -5,15 +5,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-        alex: ["'Alex Brush'", "cursive"],
-        allura: ["Allura", "cursive"],
-        dancing: ["'Dancing Script'", "cursive"],
-        edu: ["'Edu AU VIC WA NT Arrows'", "cursive"],
-        kaushan: ["'Kaushan Script'", "cursive"],
-        merienda: ["Merienda", "cursive"],
-        outfit: ["Outfit", "sans-serif"],
-        prata: ["Prata", "serif"],
+        manrope: ["Manrope", "sans-serif"],
       },
       boxShadow: {
         "dot-3d":
